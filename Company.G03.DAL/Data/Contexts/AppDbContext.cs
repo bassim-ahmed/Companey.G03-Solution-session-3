@@ -24,6 +24,6 @@ namespace Company.G03.DAL.Data.Contexts
         //    optionsBuilder.UseSqlServer("server=DESKTOP-G62R036\\VAMPRITA;Database=AppERS02;Trusted_Connection=true;TrustServerCertificate =true;");
         //}
 
-        public DbSet<Department> Department { get; set; }
+        public DbSet<Department> Departments { get; set; }
     }
 }

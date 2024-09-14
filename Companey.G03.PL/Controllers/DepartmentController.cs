@@ -16,5 +16,11 @@ namespace Companey.G03.PL.Controllers
             var departments=_DepartmentResitory?.GetAll();
             return View(departments);
         }
+        [HttpGet]
+        public IActionResult Create()
+        {
+         
+            return View();
+        }
     }
 }
