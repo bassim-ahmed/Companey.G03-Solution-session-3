@@ -1,4 +1,4 @@
-﻿using Company.G03.DAL.Model;
+﻿using Company.G03.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Company.G03.BL.Interface
 {
-    public interface IdepartmentRepository
+    public interface IDepartmentRepository
     {
-       public IEnumerable<Department> GetAll();
+        IEnumerable<Department> GetAll();
         Department Get(int id);
         int Add(Department entity);
         int Update(Department entity);

@@ -17,11 +17,11 @@ namespace Companey.G03.PL
             builder.Services.AddDbContext<AppDbContext>(options => {
 
                 //options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnction"]);
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnction"));
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 
             });//Allow DI For AppDbContext
 
-            builder.Services.AddScoped<IdepartmentRepository,DepartmentResitory>();//Allow DI For DepartmentResitory
+            builder.Services.AddScoped<IDepartmentRepository,DepartmentResitory>();//Allow DI For DepartmentResitory
 
             var app = builder.Build();
 

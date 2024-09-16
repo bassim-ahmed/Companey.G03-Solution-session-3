@@ -1,4 +1,4 @@
-﻿using Company.G03.DAL.Model;
+﻿using Company.G03.DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ namespace Company.G03.DAL.Data.Contexts
         public AppDbContext(DbContextOptions<AppDbContext> options):base(options)
         {
             
-        }
+        } 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
