@@ -34,7 +34,7 @@ namespace Company.G03.DAL.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime>("DateOfCreation")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
