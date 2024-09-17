@@ -15,6 +15,7 @@ namespace Company.G03.DAL.Models
         [Range(25,60,ErrorMessage ="Age Must be Betwwen 25,60")]
         public int? Age {  get; set; }
         [Required(ErrorMessage = "Salary Is Required")]
+        [DataType(DataType.Currency)]
         public decimal Salary {  get; set; }
         [DataType(DataType.EmailAddress)]
         public string Email {  get; set; }

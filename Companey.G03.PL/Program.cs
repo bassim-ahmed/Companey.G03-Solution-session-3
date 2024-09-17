@@ -1,4 +1,5 @@
 using Company.G03.BL.Interface;
+using Company.G03.BL.Interfaces;
 using Company.G03.BL.Repositories;
 using Company.G03.DAL.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
@@ -22,7 +23,7 @@ namespace Companey.G03.PL
             });//Allow DI For AppDbContext
 
             builder.Services.AddScoped<IDepartmentRepository,DepartmentResitory>();//Allow DI For DepartmentResitory
-
+            builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
