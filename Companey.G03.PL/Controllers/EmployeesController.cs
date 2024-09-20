@@ -8,19 +8,33 @@ namespace Company.G03.PL.Controllers
     public class EmployeesController :Controller
     {
         private readonly IEmployeeRepository _employeeReopsitory;
-        public EmployeesController(IEmployeeRepository employeeRepository)
+        private readonly IDepartmentRepository _departmentRepository;
+        public EmployeesController(IEmployeeRepository employeeRepository,IDepartmentRepository departmentRepository)
         {
             _employeeReopsitory= employeeRepository; 
+            _departmentRepository= departmentRepository;
         }
-        public IActionResult Index()
+        public IActionResult Index(string InputSearch)
         {
-            var employees = _employeeReopsitory.GetAll();
+            var employees=Enumerable.Empty<Employee>();
+            if (string.IsNullOrEmpty(InputSearch))
+            {
+                 employees = _employeeReopsitory.GetAll();
+            }
+            else
+            {
+                employees = _employeeReopsitory.GetByName(InputSearch);
+            }
+       
+            //ViewData["Test"] = "hello from backend";
+            //ViewBag.Test1 = "hello from viewbag";
             return View(employees);
         }
         [HttpGet]
         public IActionResult Create()
         {
-
+            var departments= _departmentRepository.GetAll();
+            ViewData["departments"] = departments;
             return View();
         }
         [HttpPost]
@@ -49,6 +63,8 @@ namespace Company.G03.PL.Controllers
         [HttpGet]
         public IActionResult Edit(int? id)
         {
+            var departments = _departmentRepository.GetAll();
+            ViewData["departments"] = departments;
             //if (id is null) return BadRequest();
             //var department = _DepartmentRepository.Get(id.Value);
             //if (department is null) return NotFound();
@@ -68,8 +84,13 @@ namespace Company.G03.PL.Controllers
                 var Count = _employeeReopsitory.Update(model);
                 if (Count > 0)
                 {
-                    return RedirectToAction(nameof(Index));
+                    TempData["Message"] = "Employee Has Been edit!";
                 }
+                else
+                {
+                    TempData["Message"] = "Employee edit failed";
+                }
+                return RedirectToAction(nameof(Index));
             }
             return View(model);
         }

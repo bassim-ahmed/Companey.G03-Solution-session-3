@@ -1,6 +1,7 @@
 ﻿@model Employee
 @{
     ViewData["Title"] = "Create";
+    var departments = new SelectList(ViewData["departments"] as IEnumerable<Department>, nameof(Department.Id),nameof(Department.Name));
 }
 
 <h1>Create Employee Page</h1>
@@ -42,7 +43,17 @@
         <input asp-for="HiringDate" class="form-control" />
         <span asp-validation-for="HiringDate" class="text-danger"></span>
     </div>
+    <div class="form-group">
+        <label asp-for="WorkFor" class="col-form-label"></label>
+   <select asp-for="WorkForId" asp-items="departments" class="form-control">
+    <option value="@null">--Select Department  </option>
+</select>
+    </div>
   
     <input type="submit" value="Create" class="btn btn-primary mt-5" />
     <a asp-controller="Department" asp-action="Index" class="btn btn-light mt-5">Back To List</a>
 </form>
+@section Test{
+<script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
