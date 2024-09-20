@@ -17,12 +17,10 @@ namespace Company.G03.BL.Repositories
         
            
         }
-  
 
-      
-
-     
-
-       
+        public IEnumerable<Employee> GetByName(string name)
+        {
+            return _context.Employees.Where(E => E.Name.ToLower().Contains(name.ToLower())).Include(E=>E.WorkFor).ToList();
+        }
     }
 }

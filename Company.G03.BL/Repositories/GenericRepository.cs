@@ -1,6 +1,7 @@
 ﻿using Company.G03.BL.Interfaces;
 using Company.G03.DAL.Data.Contexts;
 using Company.G03.DAL.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +12,17 @@ namespace Company.G03.BL.Repositories
 {
     public class GenericRepository<T> : IGenericRespository<T>where T : BaseEntity
     {
-        private readonly AppDbContext _context;
+        private protected readonly AppDbContext _context;
         public GenericRepository(AppDbContext context)
         {
             _context = context;
         }
         public IEnumerable<T> GetAll()
         {
+            if (typeof(T) == typeof(Employee))
+            {
+                return (IEnumerable<T>) _context.Employees.Include(E=>E.WorkFor).ToList();
+            }
             return _context.Set<T>().ToList();
         }
         public T Get(int id)

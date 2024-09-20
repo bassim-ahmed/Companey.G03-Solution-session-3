@@ -2,9 +2,35 @@
 
 @{
     ViewData["Title"] = "Index";
+    //second diffrance ViewData and ViewBag
+    string s1 = ViewData["Test"] as string; //requried casting
+    string s2 = ViewBag.test1;//dynamic
 }
+@* <div class="alert alert-danger">
+    <p>@ViewData["Test"]</p>
+</div>
+<div class="alert alert-dark">
+    <p>@ViewBag.test1"</p>
+</div> *@
 
+@if(!string.IsNullOrEmpty(TempData["Message"] as String))
+{
+<div class="alert alert-dark">
+    <p>@TempData["Message"]</p>
+</div>
+}
 <h1>All Employee</h1>
+<form asp-action="Index">
+    <div class="row">
+        <div class="col-8">
+            <input type="text" id="id" name="InputSearch" class="form-control" />
+        </div>
+        <div class="col-4">
+            <input type="submit" value="Search" class="btn btn-success" />
+        </div>
+
+    </div>
+</form>
 <a a asp-action="Create" class="btn btn-primary">Create Employee</a>
 <br />
 <br />
@@ -16,6 +42,7 @@
             <tr>
                 <th>@Html.DisplayNameFor(D => D.Name)</th>
                 <th>@Html.DisplayNameFor(D => D.Age)</th>
+                <th>@Html.DisplayNameFor(D => D.WorkFor)</th>
                 <th>@Html.DisplayNameFor(D => D.Salary)</th>
                 <th>@Html.DisplayNameFor(D => D.Email)</th>
                 <th>@Html.DisplayNameFor(D => D.PhoneNumbr)</th>
@@ -34,6 +61,7 @@
 
                     <td>@employee.Name</td>
                     <td>@employee.Age</td>
+                    <td>@employee.WorkFor?.Name</td>
                     <td>@Html.DisplayFor(M => employee.Salary)</td>
                     <td>@Html.DisplayFor(M =>employee.Email)</td>
                     <td>@employee.PhoneNumbr</td>

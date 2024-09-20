@@ -25,5 +25,8 @@ namespace Company.G03.DAL.Models
         public bool IsDeleted {  get; set; }
         public DateTime HiringDate { get; set; }
         public DateTime DateOfCreation { get; set; }= DateTime.Now;
+
+        public int? WorkForId {  get; set; }//fk
+        public Department? WorkFor {  get; set; }
     }
 }
