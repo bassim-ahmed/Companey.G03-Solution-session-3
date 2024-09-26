@@ -1,8 +1,11 @@
+using Company.G03.BL;
 using Company.G03.BL.Interface;
 using Company.G03.BL.Interfaces;
 using Company.G03.BL.Repositories;
 using Company.G03.DAL.Data.Contexts;
+using Company.G03.PL.Mapping.Employees;
 using Company.G03.PL.Services;
+using Microsoft.Build.Execution;
 using Microsoft.EntityFrameworkCore;
 
 namespace Companey.G03.PL
@@ -25,7 +28,10 @@ namespace Companey.G03.PL
 
             builder.Services.AddScoped<IDepartmentRepository,DepartmentResitory>();//Allow DI For DepartmentResitory
             builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            builder.Services.AddAutoMapper(typeof(EmployeeProfile));
 
+
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IScopedService, ScopedService>();
             builder.Services.AddSingleton<ISingeltonService,SingeltonService>();
             builder.Services.AddTransient<ITranslentService, TranslentService>();

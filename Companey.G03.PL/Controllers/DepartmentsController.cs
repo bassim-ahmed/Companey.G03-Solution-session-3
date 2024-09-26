@@ -13,9 +13,9 @@ namespace Companey.G03.PL.Controllers
             _DepartmentRepository = departmentResitory;
         }
         [HttpGet]
-        public IActionResult Index()
+        public async Task< IActionResult> Index()
         {
-            var departments= _DepartmentRepository.GetAll();
+            var departments= await _DepartmentRepository.GetAll();
             return View(departments);
         }
         [HttpGet]
@@ -25,12 +25,12 @@ namespace Companey.G03.PL.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(Department model)
+        public async Task< IActionResult> Create(Department model)
         {
             if (ModelState.IsValid)
             {
 
-                var Count = _DepartmentRepository.Add(model);
+                var Count = await _DepartmentRepository.Add(model);
                 if (Count > 0)
                 {
                     return RedirectToAction(nameof(Index));
@@ -39,22 +39,22 @@ namespace Companey.G03.PL.Controllers
             return View(model);
 
         }
-        public IActionResult Details(int?id, string viewName= "Details")
+        public async Task< IActionResult> Details(int?id, string viewName= "Details")
         {
             if (id is null) return BadRequest();
-            var department = _DepartmentRepository.Get(id.Value);
+            var department = await _DepartmentRepository.Get(id.Value);
             if(department is null) return NotFound();
                 return View(viewName,department);
         }
         //update
         [HttpGet]
-        public IActionResult Edit(int? id)
+        public async Task< IActionResult> Edit(int? id)
         {
             //if (id is null) return BadRequest();
             //var department = _DepartmentRepository.Get(id.Value);
             //if (department is null) return NotFound();
             //return View(department);
-            return Details(id, "Edit");
+            return await Details(id, "Edit");
         }
 
 
@@ -75,13 +75,13 @@ namespace Companey.G03.PL.Controllers
             return View(model);
         }
         [HttpGet]
-        public IActionResult Delete(int? id)
+        public async Task< IActionResult> Delete(int? id)
         {
             //if (id is null) return BadRequest();
             //var department = _DepartmentRepository.Get(id.Value);
             //if (department is null) return NotFound();
             //return View(department);
-            return Details(id, "Delete");
+            return await Details(id, "Delete");
         }
 
         [HttpPost]
