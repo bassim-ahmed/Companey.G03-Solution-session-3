@@ -10,17 +10,17 @@ namespace Company.G03.DAL.Models
     public class Employee:BaseEntity
     {
         
-        [Required(ErrorMessage ="Name Is Required")]
+      
         public string Name { get; set; }
-        [Range(25,60,ErrorMessage ="Age Must be Betwwen 25,60")]
+       
         public int? Age {  get; set; }
-        [Required(ErrorMessage = "Salary Is Required")]
-        [DataType(DataType.Currency)]
+  
         public decimal Salary {  get; set; }
-        [DataType(DataType.EmailAddress)]
+        
         public string Email {  get; set; }
-        [Phone]
+      
         public string PhoneNumbr {  get; set; }
+        public string? ImageName { get; set; }
         public bool IsActive { get; set; }
         public bool IsDeleted {  get; set; }
         public DateTime HiringDate { get; set; }

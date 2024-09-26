@@ -17,23 +17,23 @@ namespace Company.G03.BL.Repositories
         {
             _context = context;
         }
-        public IEnumerable<T> GetAll()
+        public async Task<IEnumerable<T>> GetAll()
         {
             if (typeof(T) == typeof(Employee))
             {
-                return (IEnumerable<T>) _context.Employees.Include(E=>E.WorkFor).ToList();
+                return (IEnumerable<T>) await _context.Employees.Include(E=>E.WorkFor).ToListAsync();
             }
-            return _context.Set<T>().ToList();
+            return await _context.Set<T>().ToListAsync();
         }
-        public T Get(int id)
+        public async Task<T?> Get(int id)
         {
-          return _context.Set<T>().Find(id);
+          return await _context.Set<T>().FindAsync(id);
         }
 
-        public int Add(T entity)
+        public async Task<int> Add(T entity)
         {
-          _context.Add(entity);
-            return _context.SaveChanges();
+          await  _context.AddAsync(entity);
+            return await _context.SaveChangesAsync();
         }
 
         public int Update(T entity)

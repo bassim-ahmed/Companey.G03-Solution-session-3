@@ -8,9 +8,9 @@ namespace Company.G03.BL.Interfaces
 {
     public interface IGenericRespository<T>
     {
-        IEnumerable<T> GetAll();
-        T Get(int id);
-        int Add(T entity);
+        Task< IEnumerable<T>> GetAll();
+       Task<T> Get(int id);
+       Task< int> Add(T entity);
         int Update(T entity);
         int Delete(T entity);
     }
