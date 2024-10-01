@@ -4,12 +4,14 @@ using Company.G03.BL.Interfaces;
 using Company.G03.DAL.Models;
 using Company.G03.PL.Helper;
 using Company.G03.PL.ViewModels.Employees;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Drawing;
 using System.Reflection.Metadata;
 
 namespace Company.G03.PL.Controllers
 {
+    [Authorize]
     public class EmployeesController :Controller
     {
         //private readonly IEmployeeRepository _employeeReopsitory;

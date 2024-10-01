@@ -1,4 +1,6 @@
 ﻿using Company.G03.DAL.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Company.G03.DAL.Data.Contexts
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options):base(options)
         {
@@ -17,7 +19,9 @@ namespace Company.G03.DAL.Data.Contexts
         } 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
         }
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
@@ -26,5 +30,6 @@ namespace Company.G03.DAL.Data.Contexts
 
         public DbSet<Department> Departments { get; set; }
         public DbSet<Employee> Employees { get; set; }
+ 
     }
 }

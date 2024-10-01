@@ -3,10 +3,14 @@ using Company.G03.BL.Interface;
 using Company.G03.BL.Interfaces;
 using Company.G03.BL.Repositories;
 using Company.G03.DAL.Data.Contexts;
+using Company.G03.DAL.Data.Migrations;
+using Company.G03.DAL.Models;
 using Company.G03.PL.Mapping.Employees;
 using Company.G03.PL.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Build.Execution;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Companey.G03.PL
 {
@@ -29,18 +33,23 @@ namespace Companey.G03.PL
             builder.Services.AddScoped<IDepartmentRepository,DepartmentResitory>();//Allow DI For DepartmentResitory
             builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             builder.Services.AddAutoMapper(typeof(EmployeeProfile));
-
+            //builder.Services.AddScoped<UserManager<ApplicationUser>>();
 
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IScopedService, ScopedService>();
             builder.Services.AddSingleton<ISingeltonService,SingeltonService>();
             builder.Services.AddTransient<ITranslentService, TranslentService>();
+            builder.Services.AddIdentity<ApplicationUser,IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+            builder.Services.ConfigureApplicationCookie(config =>
+            {
+                config.LoginPath = "/Account/SignIn";
+            });
 
 
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
+            if (!app.Environment.IsDevelopment()) 
             {
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
@@ -51,6 +60,9 @@ namespace Companey.G03.PL
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseAuthorization();
 
