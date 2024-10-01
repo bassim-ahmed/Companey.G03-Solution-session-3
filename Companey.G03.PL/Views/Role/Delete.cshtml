@@ -1,0 +1,22 @@
+﻿@model RoleViewModel
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete User</h1>
+<form asp-action="Delete">
+    <div class="form-group">
+        <label asp-for="Id" class="col-form-label"></label>
+        <input asp-for="Id" class="form-control" readonly />
+
+    </div>
+    <div class="form-group">
+        <label asp-for="RoleName " class="col-form-label"></label>
+        <input asp-for="RoleName" class="form-control" readonly />
+
+    </div>
+   
+    
+    <input type="submit" value="Delete" class="btn btn-danger" />
+    <a asp-controller="User" asp-action="Index" class="btn btn-light">Back To List</a>
+</form>
