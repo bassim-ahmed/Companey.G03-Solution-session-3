@@ -1,13 +1,15 @@
 ﻿using Company.G03.DAL.Models;
 using Company.G03.PL.ViewModels;
 using Company.G03.PL.ViewModels.Employees;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Company.G03.PL.Controllers
 {
-	public class UserController : Controller
+    [Authorize(Roles = "Admin")]
+    public class UserController : Controller
 	{
 		private readonly UserManager<ApplicationUser> _userManager;
 
